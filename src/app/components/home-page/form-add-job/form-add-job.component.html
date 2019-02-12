@@ -1,15 +1,19 @@
 <mat-card class="example-card">
-  <div class="container bg-primary">
-    <div class=" d-flex justify-content-end align-content-center">
-      <button type="button" class="close text-danger" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+  <mat-card-header class="bg-primary">
+
+    <div class="container ">
+      <div class=" d-flex justify-content-end align-content-center">
+        <button type="button" class="close text-danger" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h3 class="text-center">Add More Job</h3>
+
+
+
     </div>
-    <h3 class="text-center">Add More Job</h3>
+  </mat-card-header>
 
-
-
-  </div>
 
   <mat-card-content>
 
@@ -33,7 +37,9 @@
   </mat-card-content>
 
   <mat-card-actions class="d-flex justify-content-end">
-    <button mat-button> Add</button>
-    <button mat-button> Close</button>
+
+    <button class="mr-2" mat-flat-button color="primary">Add</button>
+    <button mat-flat-button color="warn">Close</button>
+
   </mat-card-actions>
 </mat-card>
