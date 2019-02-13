@@ -6,17 +6,28 @@
   </h1>
 
   <div class=" d-flex justify-content-end">
-    <button class="mb-3 " mat-raised-button color="primary"><i class="fas fa-plus"></i> ADD</button>
+    <button
+      class="mb-3 " mat-raised-button
+      color="primary"
+      (click)="onChange()"
+    ><i class="fas fa-plus"></i> ADD</button>
 
   </div>
 
   <div class="row">
 
-    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-      <app-data-table ></app-data-table>
+    <div
+      [ngClass]="{
+        'col-xs-8 col-sm-8 col-md-8 col-lg-8': isShowForm,
+        'col-xs-12 col-sm-12 col-md-12 col-lg-12': !isShowForm
+      }"
+    >
+      <app-data-table [formShow]="isShowForm" ></app-data-table>
     </div>
 
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <div *ngIf="isShowForm"
+      class="col-xs-4 col-sm-4 col-md-4 col-lg-4"
+    >
       <app-form-add-job></app-form-add-job>
     </div>
 

@@ -9,7 +9,14 @@ export class HomePageComponent implements OnInit {
 
   constructor() { }
 
+   isShowForm = true;
+
   ngOnInit() {
+  }
+
+  onChange(): void {
+      this.isShowForm = !this.isShowForm;
+
   }
 
 }
