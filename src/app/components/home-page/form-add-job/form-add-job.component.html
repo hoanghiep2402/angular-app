@@ -17,17 +17,78 @@
 
   <mat-card-content>
 
-
-    <form class="example-form">
+      <!--name-->
+    <form autocomplete="off" #formAddData="ngForm" (ngSubmit)="onSubmitForm(formAddData)" class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Name" value="">
+        <input
+          matInput
+          placeholder="Name"
+          [(ngModel)]="todo.name"
+          name="name"
+          required
+          minlength="3"
+          maxlength="40"
+          pattern="/^[a-z ,.'-]+$/i"
+          #name="ngModel"
+        >
+
       </mat-form-field>
 
+      <!--validation name-->
+
+        <!--required-->
+        <div
+          *ngIf="name.dirty && name.errors?.required"
+          class="alert alert-danger"
+        >
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>Warning!</strong> Path Name is required...
+        </div>
+
+
+      <!--minlength-->
+      <div
+        *ngIf=" name.errors?.minlength"
+        class="alert alert-danger"
+      >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Warning!</strong>  Path Name must have from 3 - 50 characters
+      </div>
+
+
+      <!-- end validation name-->
+
+
+      <!--Time-->
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Choose a date"
+          [(ngModel)]="todo.time"
+          name="time"
+          #time="ngModel"
+        >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+
+      <div
+        *ngIf="time.untouched && name.errors?.required"
+        class="alert alert-danger"
+      >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Warning!</strong> Path Name is required...
+      </div>
+
+
+      <mat-card-actions class=" mt-3 d-flex justify-content-end">
+
+        <button type="submit" class="mr-2" mat-flat-button color="primary">Add</button>
+        <button mat-flat-button color="warn">Close</button>
+
+      </mat-card-actions>
+
     </form>
 
 
@@ -36,10 +97,5 @@
 
   </mat-card-content>
 
-  <mat-card-actions class="d-flex justify-content-end">
 
-    <button class="mr-2" mat-flat-button color="primary">Add</button>
-    <button mat-flat-button color="warn">Close</button>
-
-  </mat-card-actions>
 </mat-card>
