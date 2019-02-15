@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Todos } from '../../../models/todos.class';
-import {NgForm} from '@angular/forms';
-import {NgModel} from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Todo } from '../../../models/todo.class';
+// import {NgForm} from '@angular/forms';
+// import {NgModel} from '@angular/forms';
+import {TodoService} from '../../../services/todo.service';
 
 
 @Component({
@@ -13,14 +14,20 @@ export class FormAddJobComponent implements OnInit {
 
   constructor() { }
 
-  public todo: Todos = new Todos();
+  public todo: Todo = new Todo();
+  public todoService: TodoService;
 
   ngOnInit() {
+
   }
+
+
 
   onSubmitForm(formAddData) {
 
-    console.log(formAddData.value);
+    if (formAddData.valid) {
+      console.log(formAddData.value);
+    }
   }
 
 }
