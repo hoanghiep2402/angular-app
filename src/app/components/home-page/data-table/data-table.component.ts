@@ -1,15 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Todo} from '../../../models/todo.class';
-import {TodoService} from '../../../services/todo.service';
+import {TodoService} from '../../../services/TodoService/todo.service';
 import {Subscription} from 'rxjs';
-
-
-// const ELEMENT_DATA: Todo[] = [
-//   {id: 1, name: 'Hoc bai', time: new Date(), status: false},
-//   {id: 2, name: 'Learning English', time: new Date(), status: false},
-//
-// ];
-
+import {DialogComponent} from '../../dialog/dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-data-table',
@@ -23,7 +17,14 @@ export class DataTableComponent implements OnInit {
 
   public todos: Todo[] = [];
   public dataSource: Todo[];
-  constructor( public todoService: TodoService ) { }
+
+  constructor(
+    public todoService: TodoService,
+    public dialog: MatDialog,
+
+    ) { }
+
+
   @Input('formShow') tableWidth = false;
 
   public displayedColumns: string[] = ['_id', 'name', 'time', 'status', 'tool'];
@@ -41,15 +42,19 @@ export class DataTableComponent implements OnInit {
 
 
   // change status
-  onFinished(ele): void {
+  onCompleted(ele): void {
+
+
      const newDataSource = this.dataSource.map((item) => {
-         if (item._id === ele.id) {
+         if (item._id === ele._id) {
            ele.status = !ele.status;
            return ele;
          } else {
            return item;
          }
      });
+
+
      this.dataSource = newDataSource;
   }
 
@@ -65,7 +70,17 @@ export class DataTableComponent implements OnInit {
 
    });
 
-
-
   }
+
+  onDelete(todo: Todo) {
+     this.dialog.open(DialogComponent,
+       {
+         height: '300px',
+         width: '400px',
+
+       }
+       );
+  }
+
+
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, EventEmitter, Output} from '@angular/core';
 import { Todo } from '../../../models/todo.class';
 // import {NgForm} from '@angular/forms';
 // import {NgModel} from '@angular/forms';
-import {TodoService} from '../../../services/todo.service';
+import {TodoService} from '../../../services/TodoService/todo.service';
 
 
 @Component({
@@ -12,10 +12,11 @@ import {TodoService} from '../../../services/todo.service';
 })
 export class FormAddJobComponent implements OnInit {
 
-  constructor() { }
+  constructor(  public todoService: TodoService) { }
 
   public todo: Todo = new Todo();
-  public todoService: TodoService;
+  @Output('CloseForm')
+  onCloseFormShow = new EventEmitter<boolean>();
 
   ngOnInit() {
 
@@ -27,7 +28,18 @@ export class FormAddJobComponent implements OnInit {
 
     if (formAddData.valid) {
       console.log(formAddData.value);
+     this.todoService.postTodo(formAddData.value).subscribe(
+       (data) => {
+         formAddData.reset();
+         this.closeForm();
+       }
+     );
     }
+  }
+
+  closeForm() {
+
+    this.onCloseFormShow.emit(false);
   }
 
 }

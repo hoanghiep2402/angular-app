@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
-// components
+// region Components
+
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ContentComponent } from './components/content/content.component';
@@ -11,12 +12,21 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { DataTableComponent } from './components/home-page/data-table/data-table.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { MessageComponent } from './components/message/message.component';
 import { FormAddJobComponent } from './components/home-page/form-add-job/form-add-job.component';
+// endregion
 
 
+//region Service
 // services
-import {TodoService} from './services/todo.service';
-// material design
+import {TodoService} from './services/TodoService/todo.service';
+import {MessageService} from './services/MessageService/message.service';
+import {MatDialogModule} from '@angular/material/dialog';
+//endregion
+
+//region MaterialDesign
+
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
@@ -28,6 +38,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+//endregion
 
 
 
@@ -55,6 +66,9 @@ const appRoutes: Routes = [
     PagenotfoundComponent,
     DataTableComponent,
     FormAddJobComponent,
+    MessageComponent,
+    DialogComponent,
+    MatDialogModule
 
   ],
   imports: [
@@ -75,12 +89,17 @@ const appRoutes: Routes = [
     MatInputModule,
     FormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+
 
   ],
   providers: [
-    TodoService
+    TodoService,
+    MessageService,
+    MatDialogModule
+
   ],
+  entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

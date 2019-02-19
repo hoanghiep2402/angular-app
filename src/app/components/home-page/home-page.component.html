@@ -22,14 +22,23 @@
         'col-xs-12 col-sm-12 col-md-12 col-lg-12': !isShowForm
       }"
     >
+
       <app-data-table [formShow]="isShowForm" ></app-data-table>
+
+
     </div>
 
     <div *ngIf="isShowForm"
       class="col-xs-4 col-sm-4 col-md-4 col-lg-4"
     >
-      <app-form-add-job></app-form-add-job>
+
+
+      <app-form-add-job (CloseForm)="onChange()"></app-form-add-job>
+
+
+
     </div>
+
 
 
   </div>
