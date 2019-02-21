@@ -1,9 +1,26 @@
+<h2 class="text-center text-black-50" mat-dialog-title>{{nameDialog}}</h2>
+<app-message></app-message>
 
-<h2 mat-dialog-title>{{message}}</h2>
 <mat-dialog-content class="mat-typography">
-
+  <h3>{{ message }}</h3>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+
+
+<mat-dialog-actions class="justify-content-end" align="end">
+  <button
+    (click)="onRefuse()"
+    mat-flat-button
+    mat-dialog-close
+    color="warn">Cancel</button>
+
+  <button
+    (click)="onConfirm()"
+    class="ml-2"
+    mat-flat-button
+    cdkFocusInitial
+    color="primary"
+  >Yes</button>
 </mat-dialog-actions>
+
+
+

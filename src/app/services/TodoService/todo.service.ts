@@ -5,6 +5,8 @@ import {Todo} from '../../models/todo.class';
 import {catchError, tap} from 'rxjs/operators';
 import {MessageService} from '../MessageService/message.service';
 import {Message, MessType} from '../../models/message.class';
+import {timeout} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +24,19 @@ export class TodoService {
 
 
 
+  //region get all todos
   public getAllTodo(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.api);
   }
+  //endregion
 
+
+
+  //region post todo
   public postTodo(todo: Todo): Observable<Todo> {
     return this.http.post<Todo>(this.api, todo).pipe(
       tap((newTodo: Todo) => {
         const successMessage = new Message(MessType.success, 'Todo Created Successfull!');
-        console.log(successMessage);
         this.log(successMessage);
       } ),
       catchError(this.handleError<Todo>('Add Hero'))
@@ -38,17 +44,34 @@ export class TodoService {
 
 
   }
+  //endregion
 
 
 
-  // #region HandeError
+  public deleteTodo(id: string): Observable<any> {
 
-  private handleError<T> (errType, result?: T) {
+    return this.http.delete<any>(`${this.api}/${id}`, {observe: 'response'}).pipe(
+      catchError(
+        this.handleError('Delete failed!')
+      )
+    );
+  }
+
+    public updateTodo(todo: Todo): Observable<any> {
+    return this.http.put<any>(`${this.api}/${todo._id}`, todo, {observe: 'response'}).pipe(
+      catchError(
+        this.handleError('Update Failed!')
+      )
+    );
+    }
+
+  // region HandleError
+
+  private handleError<T> (errType?, result?: T) {
     return (error: any): Observable<T> => {
 
-      console.error(error);
 
-      const errMessage = new Message(MessType.error, `${errType} failed: ${error.message}`)
+      const errMessage = new Message(MessType.error, `${errType} ${error.error.message}`);
 
     this.log(errMessage);
 

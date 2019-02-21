@@ -17,6 +17,8 @@ export class FormAddJobComponent implements OnInit {
   public todo: Todo = new Todo();
   @Output('CloseForm')
   onCloseFormShow = new EventEmitter<boolean>();
+  @Output('TodoAdded')
+  onAddTodoSuccess = new EventEmitter<Todo>();
 
   ngOnInit() {
 
@@ -27,9 +29,10 @@ export class FormAddJobComponent implements OnInit {
   onSubmitForm(formAddData) {
 
     if (formAddData.valid) {
-      console.log(formAddData.value);
+
      this.todoService.postTodo(formAddData.value).subscribe(
        (data) => {
+        this.onAddTodoSuccess.emit(data);
          formAddData.reset();
          this.closeForm();
        }

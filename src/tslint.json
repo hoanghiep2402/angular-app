@@ -16,5 +16,6 @@
       "no-input-rename": false,
       "no-trailing-whitespace": false,
       "comment-format": false
+
     }
 }

@@ -1,3 +1,6 @@
+
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
@@ -12,28 +15,34 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="time">
     <th mat-header-cell *matHeaderCellDef> Time </th>
-    <td mat-cell *matCellDef="let element"> {{element.time | date:'d/M/yyyy'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element?.time | date:'d/M/yyyy'}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef> Status </th>
     <td mat-cell *matCellDef="let element">
-      <span (click)="onCompleted(element)" *ngIf="element.status==false" [ngClass]="'badge badge-danger'" >Incomplete</span>
-      <span (click)="onCompleted(element)" *ngIf="element.status==true" [ngClass]="'badge badge-success'">Finished</span>
+      <span (click)="onCompleted(element)" *ngIf="element?.status==false" [ngClass]="'badge badge-danger'" >Incomplete</span>
+      <span (click)="onCompleted(element)" *ngIf="element?.status==true" [ngClass]="'badge badge-success'">Finished</span>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="tool">
     <th mat-header-cell *matHeaderCellDef> Alter </th>
     <td mat-cell *matCellDef="let element">
-      <button class="mr-2" mat-flat-button color="primary">Edit</button>
+
+      <button
+        (click)="onEdit(element)"
+        class="mr-2"
+        mat-flat-button
+        color="primary">Edit</button>
+
       <button  class="mr-2"  mat-flat-button color="basic"
         (click)="onDelete(element)"
       >Delete</button>
@@ -43,6 +52,8 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
 
 
 

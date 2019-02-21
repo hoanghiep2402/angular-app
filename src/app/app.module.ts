@@ -4,7 +4,7 @@ import { FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 // region Components
-
+import {ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ContentComponent } from './components/content/content.component';
@@ -38,8 +38,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material';
 //endregion
 
+//region lib
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { EditTodoDialogComponent } from './components/dialog/edit-todo-dialog/edit-todo-dialog.component';
+//endregion
 
 
 const appRoutes: Routes = [
@@ -68,7 +74,9 @@ const appRoutes: Routes = [
     FormAddJobComponent,
     MessageComponent,
     DialogComponent,
-    MatDialogModule
+    EditTodoDialogComponent,
+
+
 
   ],
   imports: [
@@ -90,7 +98,11 @@ const appRoutes: Routes = [
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    NgxSpinnerModule,
+    MatSelectModule,
+    ReactiveFormsModule
 
   ],
   providers: [
@@ -99,7 +111,7 @@ const appRoutes: Routes = [
     MatDialogModule
 
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, EditTodoDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

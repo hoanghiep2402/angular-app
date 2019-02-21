@@ -1,6 +1,7 @@
 
 <div class="container-fluid">
 
+
   <h1 class="text-center">
     Todo list
   </h1>
@@ -23,7 +24,10 @@
       }"
     >
 
-      <app-data-table [formShow]="isShowForm" ></app-data-table>
+      <app-data-table
+        [todoAdded]="todo"
+        [formShow]="isShowForm"
+      ></app-data-table>
 
 
     </div>
@@ -33,7 +37,7 @@
     >
 
 
-      <app-form-add-job (CloseForm)="onChange()"></app-form-add-job>
+      <app-form-add-job (TodoAdded)="onAddTodo($event)" (CloseForm)="onChange()"></app-form-add-job>
 
 
 

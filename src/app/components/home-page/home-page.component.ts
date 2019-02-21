@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Todo} from '../../models/todo.class';
 
 @Component({
   selector: 'app-home-page',
@@ -9,9 +10,13 @@ export class HomePageComponent implements OnInit {
 
   constructor() { }
 
-   isShowForm = false;
-
+    isShowForm = false;
+     todo: Todo;
   ngOnInit() {
+  }
+
+  onAddTodo(todo: Todo) {
+      this.todo = todo ;
   }
 
   onChange(): void {

@@ -1,0 +1,57 @@
+<h3 mat-dialog-title align="center">Edit Todo</h3>
+
+<form
+  [formGroup]="formEdit"
+  (ngSubmit)="onSubmitForm()"
+  class="d-flex flex-column h-75"
+  autocomplete="off"
+  novalidate
+
+>
+<div  mat-dialog-content style="overflow:visible" >
+    <p align="center" >
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Work Todo</mat-label>
+
+        <input [(ngModel)]="formEdit.value.name" formControlName="name" matInput placeholder="Input Your Work!">
+
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+      </mat-form-field>
+    </p>
+
+
+    <div  class="w-100">
+
+      <mat-form-field class="col-6">
+
+        <input [(ngModel)]="formEdit.value.time" formControlName="time" matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-select [(ngModel)]="formEdit.value.status" formControlName="status" placeholder="Select">
+          <mat-option  class="bg-danger" [value]=false>InComplete</mat-option>
+          <mat-option  class="bg-primary" [value]=true>Finished</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions align="end">
+      <button mat-flat-button mat-button [mat-dialog-close]="false"  color="warn">Cancel</button>
+      <button
+        [disabled]="formEdit.invalid "
+        type="submit" class="ml-2" mat-flat-button  color="primary">Yes</button>
+    </div>
+
+
+
+</div>
+
+</form>
+
+
+
